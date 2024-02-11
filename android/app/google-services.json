@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "273416080644",
+    "project_id": "economiza-ae-eap0gb",
+    "storage_bucket": "economiza-ae-eap0gb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273416080644:android:d467f937540df57b431451",
+        "android_client_info": {
+          "package_name": "com.mycompany.economizaae"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF_JDGTavcOmITkqRfwjQyNF0hawh5KJc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
