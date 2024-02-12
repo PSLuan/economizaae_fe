@@ -235,8 +235,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                                   Align(
                                     child: TabBar(
                                       labelStyle: const TextStyle(
-                                        fontSize: 18,
-                                      ),
+                                          fontSize: 18, color: Colors.black),
                                       isScrollable: true,
                                       labelColor: const Color(0xFF14181B),
                                       labelPadding: const EdgeInsets.symmetric(
@@ -295,8 +294,10 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                                                               .of(context)
                                                           .headlineMedium
                                                           .override(
-                                                            fontFamily: 'Inter',
-                                                          ),
+                                                              fontFamily:
+                                                                  'Inter',
+                                                              color:
+                                                                  Colors.black),
                                                     ),
                                                   ),
                                                   Padding(
