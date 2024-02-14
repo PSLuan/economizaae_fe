@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, unused_local_variable, unnecessary_null_comparison
 
+import 'package:economiza_ae/authentication_page/authentication_page_widget.dart';
 import 'package:economiza_ae/backend/api_requests/api_calls.dart';
 import 'package:economiza_ae/models/filial_model.dart';
 import 'package:economiza_ae/models/pessoa_juridica.dart';
@@ -167,43 +168,55 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               .error; // Default icon if tipoEmpresa.name doesn't match any case
                       }
 
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF54B7DC),
-                          boxShadow: const [
-                            BoxShadow(
-                              blurRadius: 4,
-                              color: Color(0x33000000),
-                              offset: Offset(5, 5),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        margin: const EdgeInsets.all(30),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                iconData,
-                                size:
-                                    40, // Adjust the size of the icon as needed
-                                color: Colors
-                                    .white, // Adjust the color of the icon as needed
-                              ),
-                              const SizedBox(
-                                  height:
-                                      10), // Add space between icon and text
-                              Text(
-                                tipoEmpresa.name.replaceAll('_',
-                                    ' DE '), // Replace with your actual text
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                      return GestureDetector(
+                        onTap: () {
+                          // Replace 'YourNextScreen' with the name of your destination screen
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const AuthenticationPageWidget(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF54B7DC),
+                            boxShadow: const [
+                              BoxShadow(
+                                blurRadius: 4,
+                                color: Color(0x33000000),
+                                offset: Offset(5, 5),
+                              )
                             ],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          margin: const EdgeInsets.all(30),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  iconData,
+                                  size:
+                                      40, // Adjust the size of the icon as needed
+                                  color: Colors
+                                      .white, // Adjust the color of the icon as needed
+                                ),
+                                const SizedBox(
+                                    height:
+                                        10), // Add space between icon and text
+                                Text(
+                                  tipoEmpresa.name.replaceAll('_',
+                                      ' DE '), // Replace with your actual text
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
