@@ -2,6 +2,7 @@
 
 import 'package:economiza_ae/backend/api_requests/api_calls.dart';
 import 'package:economiza_ae/models/filial_model.dart';
+import 'package:economiza_ae/models/pessoa_juridica.dart';
 
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -50,140 +51,167 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       );
     }
 
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF78618F),
-          automaticallyImplyLeading: false,
-          leading: InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () async {
-              context.pushNamedAuth('AuthenticationPage', context.mounted);
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF78618F),
+        automaticallyImplyLeading: false,
+        leading: InkWell(
+          splashColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onTap: () async {
+            context.pushNamedAuth('AuthenticationPage', context.mounted);
 
-              GoRouter.of(context).prepareAuthEvent();
-              await authManager.signOut();
-              GoRouter.of(context).clearRedirectLocation();
-            },
-            child: const Icon(
-              Icons.menu,
-              color: Color(0xFFFCFCFC),
-              size: 24,
-            ),
+            GoRouter.of(context).prepareAuthEvent();
+            await authManager.signOut();
+            GoRouter.of(context).clearRedirectLocation();
+          },
+          child: const Icon(
+            Icons.menu,
+            color: Color(0xFFFCFCFC),
+            size: 24,
           ),
-          actions: const [],
-          flexibleSpace: FlexibleSpaceBar(
-            title: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  'Economiza',
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Outfit',
-                        color: const Color(0xFFFCCDB9),
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                Text(
-                  'aê!',
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Outfit',
-                        color: const Color(0xFF37EFE4),
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              ],
-            ),
-            centerTitle: true,
-            expandedTitleScale: 1.0,
-            titlePadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-          ),
-          elevation: 2,
         ),
-        body: SafeArea(
-          top: true,
-          child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-                boxShadow: const [
-                  BoxShadow(
-                    blurRadius: 4,
-                    color: Color(0x33000000),
-                    offset: Offset(0, 2),
-                  )
-                ],
-                borderRadius: BorderRadius.circular(10),
-                shape: BoxShape.rectangle,
+        flexibleSpace: FlexibleSpaceBar(
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                'Economiza',
+                textAlign: TextAlign.center,
+                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                      fontFamily: 'Outfit',
+                      color: const Color(0xFFFCCDB9),
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
-              child: FutureBuilder<List<Filial>>(
-                future: ListarFiliaisCall.call(),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            FlutterFlowTheme.of(context).primary,
+              Text(
+                'aê!',
+                textAlign: TextAlign.center,
+                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                      fontFamily: 'Outfit',
+                      color: const Color(0xFF37EFE4),
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+            ],
+          ),
+          centerTitle: true,
+          expandedTitleScale: 1.0,
+          titlePadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+        ),
+        elevation: 2,
+      ),
+      body: Container(
+        color: const Color(0xFFA8C2CA),
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
+          child: ListView(
+            children: [
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 4,
+                      color: Color(0x33000000),
+                      offset: Offset(0, 2),
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(10),
+                  shape: BoxShape.rectangle,
+                ),
+                child: GridView.count(
+                  padding: EdgeInsets.zero,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 2,
+                  mainAxisSpacing: 10,
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true, // Use shrinkWrap to ensure proper sizing
+                  physics:
+                      const NeverScrollableScrollPhysics(), // Disable scrolling
+                  children: List<Widget>.generate(
+                    TipoEmpresa.values.length,
+                    (index) {
+                      TipoEmpresa tipoEmpresa = TipoEmpresa.values[index];
+                      if (tipoEmpresa.name.contains('_')) {
+                        tipoEmpresa.name.replaceAll('_', ' ');
+                      }
+
+                      IconData iconData;
+
+                      // Use a switch statement to select the icon based on tipoEmpresa.name
+                      switch (tipoEmpresa.name) {
+                        case 'SUPERMERCADO':
+                          iconData = Icons.local_grocery_store;
+                          break;
+                        case 'POSTO_COMBUSTIVEL':
+                          iconData = Icons.local_gas_station;
+                          break;
+                        case 'DROGRARIA':
+                          iconData = Icons.medication;
+                          break;
+                        case 'MATERIAIS_CONSTRUCAO':
+                          iconData = Icons.construction;
+                          break;
+                        default:
+                          iconData = Icons
+                              .error; // Default icon if tipoEmpresa.name doesn't match any case
+                      }
+
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF54B7DC),
+                          boxShadow: const [
+                            BoxShadow(
+                              blurRadius: 4,
+                              color: Color(0x33000000),
+                              offset: Offset(5, 5),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        margin: const EdgeInsets.all(30),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                iconData,
+                                size:
+                                    40, // Adjust the size of the icon as needed
+                                color: Colors
+                                    .white, // Adjust the color of the icon as needed
+                              ),
+                              const SizedBox(
+                                  height:
+                                      10), // Add space between icon and text
+                              Text(
+                                tipoEmpresa.name.replaceAll('_',
+                                    ' DE '), // Replace with your actual text
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    );
-                  }
-
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Text('Error: ${snapshot.error}'),
-                    );
-                  }
-
-                  // The data has been successfully retrieved
-                  final List<Filial> filiais = snapshot.data!;
-
-                  return GridView.count(
-                    padding: EdgeInsets.zero,
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                    scrollDirection: Axis.vertical,
-                    children: List<Widget>.generate(
-                      filiais.length,
-                      (index) {
-                        Filial filial = filiais[index];
-                        return Container(
-                          color: Colors.blue,
-                          margin: const EdgeInsets.all(30),
-                          child: Center(
-                            child: Text(
-                              '${filial.nomeFilial}',
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
+                      );
+                    },
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

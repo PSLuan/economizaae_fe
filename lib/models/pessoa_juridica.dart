@@ -36,15 +36,8 @@ class PessoaJuridica {
 }
 
 enum TipoEmpresa {
-  @JsonValue('SUPERMERCADO')
   SUPERMERCADO,
-
-  @JsonValue('POSTO_COMBUSTIVEL')
   POSTO_COMBUSTIVEL,
-
-  @JsonValue('DROGARIA')
   DROGRARIA,
-
-  @JsonValue('MATERIAIS_CONSTRUCAO')
   MATERIAIS_CONSTRUCAO;
 }
