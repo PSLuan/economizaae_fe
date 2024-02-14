@@ -292,11 +292,10 @@ class FirebaseAuthManager extends AuthManager
           : EconomizaAeFirebaseUser.fromUserCredential(userCredential);
     } on FirebaseAuthException catch (e) {
       final errorMsg = switch (e.code) {
-        'email-already-in-use' =>
-          'Error: The email is already in use by a different account',
-        'INVALID_LOGIN_CREDENTIALS' =>
-          'Error: The supplied auth credential is incorrect, malformed or has expired',
-        _ => 'Error: ${e.message!}',
+        'email-already-in-use' => 'Este e-mail já está sendo utilizado.',
+        'INVALID_LOGIN_CREDENTIALS' => 'E-mail ou senha incorretos.',
+        'invalid-credential' => 'E-mail ou senha incorretos.',
+        _ => 'Erro interno no servidor!',
       };
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(

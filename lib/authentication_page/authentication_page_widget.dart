@@ -809,41 +809,39 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                                           ),
                                         ),
                                         Align(
-                                          alignment: const AlignmentDirectional(
-                                              0.0, -1.0),
+                                          alignment:
+                                              const AlignmentDirectional(0, -1),
                                           child: Padding(
                                             padding: const EdgeInsetsDirectional
-                                                .fromSTEB(
-                                                24.0, 16.0, 24.0, 0.0),
+                                                .fromSTEB(24, 0, 24, 0),
                                             child: SingleChildScrollView(
                                               child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   if (responsiveVisibility(
                                                     context: context,
                                                     phone: false,
                                                     tablet: false,
                                                   ))
-                                                    Container(
-                                                      width: 230.0,
-                                                      height: 40.0,
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                      ),
+                                                    const SizedBox(
+                                                      width: 230,
+                                                      height: 40,
                                                     ),
-                                                  Text(
-                                                    'Bem-vindo!',
-                                                    textAlign: TextAlign.start,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .headlineMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                        ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                            0, 20, 0, 0),
+                                                    child: Text(
+                                                      'Bem-vindo!',
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .headlineMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                          ),
+                                                    ),
                                                   ),
                                                   Padding(
                                                     padding:
@@ -965,12 +963,19 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleMedium,
+                                                                .titleMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                ),
                                                         keyboardType:
                                                             TextInputType
                                                                 .emailAddress,
                                                         validator: _model
-                                                            .emailAddressLoginControllerValidator
+                                                            .emailAddressRegisterControllerValidator
                                                             .asValidator(
                                                                 context),
                                                       ),
@@ -1103,7 +1108,14 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleMedium,
+                                                                .titleMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                ),
                                                         validator: _model
                                                             .passwordLoginControllerValidator
                                                             .asValidator(
@@ -1236,6 +1248,12 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget>
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .primaryBackground,
+                                                          hoverBorderSide:
+                                                              BorderSide(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground,
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
