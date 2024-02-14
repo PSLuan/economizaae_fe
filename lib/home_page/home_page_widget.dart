@@ -159,17 +159,27 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   // The data has been successfully retrieved
                   final List<Filial> filiais = snapshot.data!;
 
-                  return ListView.builder(
-                    itemCount: filiais.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      Filial filial = filiais[index];
-
-                      // Customize the UI for each item in the list
-                      return ListTile(
-                        title: Text(filial.nomeFilial ?? ''),
-                        // Add more widgets to display other properties of the Filial model
-                      );
-                    },
+                  return GridView.count(
+                    padding: EdgeInsets.zero,
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5,
+                    scrollDirection: Axis.vertical,
+                    children: List<Widget>.generate(
+                      filiais.length,
+                      (index) {
+                        Filial filial = filiais[index];
+                        return Container(
+                          color: Colors.blue,
+                          margin: const EdgeInsets.all(30),
+                          child: Center(
+                            child: Text(
+                              '${filial.nomeFilial}',
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   );
                 },
               ),

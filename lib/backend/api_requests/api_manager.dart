@@ -78,13 +78,6 @@ class ApiCallResponse {
       response: response,
     );
   }
-
-  static ApiCallResponse fromCloudCallResponse(Map<String, dynamic> response) =>
-      ApiCallResponse(
-        response['body'],
-        ApiManager.toStringMap(response['headers'] ?? {}),
-        response['statusCode'] ?? 400,
-      );
 }
 
 class ApiManager {
@@ -138,7 +131,7 @@ class ApiManager {
     return Filial.filiaisFromJsonList(jsonResponse.jsonBody);
   }
 
-  Future<List<Filial>?> makeApiCall({
+  Future<Object> makeApiCall({
     required String callName,
     required String apiUrl,
     required ApiCallType callType,
@@ -163,14 +156,14 @@ class ApiManager {
     }
 
     if (cache && _apiCache.containsKey(callRecord)) {
-      return List.empty();
+      return _apiCache[callRecord]!;
     }
 
-    List<Filial>? result;
+    List<Filial> result;
     try {
       switch (callType) {
         case ApiCallType.GET:
-          result = await urlRequest(
+          result = (await urlRequest(
             callType,
             apiUrl,
             headers,
@@ -178,22 +171,26 @@ class ApiManager {
             returnBody,
             decodeUtf8,
             client: client,
-          );
+          ));
           break;
         case ApiCallType.DELETE:
         case ApiCallType.POST:
         case ApiCallType.PUT:
         case ApiCallType.PATCH:
+        default:
+          result = const ApiCallResponse(null, {}, -1) as List<Filial>;
+          break;
       }
 
-      // If caching is on, cache the result (if present).
       if (cache) {
-        result = List.empty();
-        return result;
+        _apiCache[callRecord] = result as ApiCallResponse;
       }
     } catch (e) {
-      result = List.empty();
-      return result;
+      result = const ApiCallResponse(
+        null,
+        {},
+        -1,
+      ) as List<Filial>;
     }
 
     return result;
